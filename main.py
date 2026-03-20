@@ -22,16 +22,9 @@ def main():
     
     vclass_url = zj_conf['course_url']
     
-    # 優先從環境變數讀取帳密
-    account = os.environ.get('ZJ_ACCOUNT')
-    password = os.environ.get('ZJ_PASSWORD')
-
-    # 如果沒有帳密，則進行互動式詢問
-    if not account:
-        print("\n請輸入 ZeroJudge 帳號以進行登入 (此帳號不會被儲存):")
-        account = input("帳號: ").strip()
-    if not password:
-        password = getpass.getpass("密碼: ")
+    print("\n請輸入 ZeroJudge 帳號以進行登入 (此帳號不會被儲存):")
+    account = input("帳號: ").strip()
+    password = getpass.getpass("密碼: ")
 
     # 初始化爬蟲
     scraper = ZeroJudgeScraper(
