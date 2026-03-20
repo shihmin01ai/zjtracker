@@ -5,14 +5,19 @@
 ## 安裝步驟
 
 1. 確保電腦已安裝 Python 3.8+。
-2. 進入專案目錄並啟動虛擬環境：
+2. 進入專案目錄，建立並啟動虛擬環境：
    ```powershell
    cd zj_tracker
+   python -m venv venv
    .\venv\Scripts\activate
    ```
-3. 設定設定檔：
+3. 安裝所需的依賴套件：
+   ```powershell
+   pip install -r requirements.txt
+   ```
+4. 設定設定檔：
    編輯 `config.yaml`，填寫您的課程 `course_id` 與 `course_url`。
-4. 準備 Google API 憑證：
+5. 準備 Google API 憑證：
    將您的 Google Service Account JSON 檔案命名為 `service_account.json` 並放在本目錄下。
 
 ### 1. 設定與驗證
