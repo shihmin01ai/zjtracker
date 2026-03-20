@@ -5,7 +5,3 @@ google_sheets:
   spreadsheet_name: 作業進度
   worksheet_name: 114下題目
   service_account_file: service_account.json
-display:
-  passed: ✅
-  trying: ⏳
-  not_attempted: ➖
