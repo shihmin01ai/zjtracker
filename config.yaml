@@ -1,0 +1,11 @@
+zerojudge:
+  course_id: 114學年度下學期7年級程式設計
+  course_url: https://zerojudge.tw/ShowVClass?vclassid=4075
+google_sheets:
+  spreadsheet_name: 作業進度
+  worksheet_name: 114下題目
+  service_account_file: service_account.json
+display:
+  passed: ✅
+  trying: ⏳
+  not_attempted: ➖
