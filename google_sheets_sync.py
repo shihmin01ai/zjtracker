@@ -98,8 +98,9 @@ class GoogleSheetsSync:
                     continue
                     
                 score = student.get('分數') or student.get('Score') or '0'
-                time = student.get('時間') or student.get('Time') or '0'
-                combined_value = f"{score} / {time}"
+                time_raw = student.get('時間') or student.get('Time') or '0'
+                formatted_time = self._format_minutes(time_raw)
+                combined_value = f"{score} / {formatted_time}"
                 
                 cells_to_update.append(gspread.cell.Cell(row=row_idx, col=col_idx, value=combined_value))
 
@@ -113,6 +114,36 @@ class GoogleSheetsSync:
     def update_assignment_data(self, assignment_name, students_data):
         # 保持舊方法相容性，但內部可以改用批次邏輯
         self.sync_all_assignments({assignment_name: students_data})
+
+    def _format_minutes(self, minutes_str):
+        """
+        將分鐘數轉換為 X天Y小時Z分鐘 格式
+        """
+        try:
+            total_minutes = int(float(minutes_str))
+        except (ValueError, TypeError):
+            return minutes_str
+
+        if total_minutes <= 0:
+            return "0"
+
+        days = total_minutes // 1440
+        remaining_after_days = total_minutes % 1440
+        hours = remaining_after_days // 60
+        minutes = remaining_after_days % 60
+
+        parts = []
+        if days > 0:
+            parts.append(f"{days}天")
+        if hours > 0:
+            parts.append(f"{hours}小時")
+        
+        # 即使分鐘是 0，如果完全沒有其他單位，則顯示 0 分鐘
+        # 或者如果有天/小時，但有剩餘分鐘，則顯示
+        if minutes > 0 or not parts:
+            parts.append(f"{minutes}分鐘")
+        
+        return "".join(parts)
 
 if __name__ == "__main__":
     pass
